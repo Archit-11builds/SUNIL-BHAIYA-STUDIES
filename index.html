@@ -1,83 +1,185 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CBSE Study Hub — V2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1020">
+<title>CBSE Study Hub — Class 10</title>
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--text:#151827;--muted:#70778a;--line:#e5e7ef;--p:#5b5cf0;--p2:#8a74ff;--shadow:0 12px 35px rgba(25,28,50,.07)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px Inter,system-ui,sans-serif}.app{min-height:100vh;display:flex}
-.side{width:260px;position:fixed;inset:0 auto 0 0;background:#111426;color:#fff;padding:22px 15px}.logo{font-size:21px;font-weight:850;padding:10px 12px 25px}.logo span{color:#8f8bff}.side small{color:#8d94aa;padding:0 12px}.nav{margin-top:9px}.nav button{width:100%;border:0;background:transparent;color:#bfc4d4;text-align:left;padding:12px 13px;border-radius:13px;margin:3px 0;font-weight:600}.nav button:hover,.nav button.active{background:#262a42;color:#fff}
-.main{margin-left:260px;width:calc(100% - 260px);max-width:1500px;padding:28px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}.eyebrow{color:var(--p);font-weight:750;font-size:13px}.top h1{margin:3px 0;font-size:30px}.muted,.tiny{color:var(--muted)}.actions{display:flex;gap:9px}.btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:10px 14px;border-radius:12px;font-weight:650}.primary{background:var(--p);color:#fff;border-color:var(--p)}
-.grid{display:grid;gap:17px}.stats{grid-template-columns:repeat(4,1fr)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:19px;box-shadow:var(--shadow)}.stat{display:flex;align-items:center;justify-content:space-between}.stat strong{font-size:28px;display:block;margin-top:5px}.ico{height:43px;width:43px;border-radius:14px;background:#efefff;display:grid;place-items:center;font-size:20px}
-.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:17px;margin-top:17px}.heroCard{background:linear-gradient(135deg,#20235a,#635bff 70%,#8878ff);color:white;border:0}.heroCard h2{font-size:25px;margin:8px 0}.heroCard p{color:#e1e2ff;max-width:600px;line-height:1.55}.heroRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.hero .btn{background:white;border-color:white;color:#282a65}.ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(#fff var(--pct),rgba(255,255,255,.18) 0);position:relative}.ring:after{content:"";position:absolute;width:98px;height:98px;border-radius:50%;background:#353875}.ring b{z-index:1;font-size:24px}
-.section{margin-top:22px}.sectionHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.sectionHead h2{font-size:19px;margin:0}.subjects{grid-template-columns:repeat(3,1fr)}.subject{transition:.18s}.subject:hover{transform:translateY(-2px)}.subjectTop{display:flex;justify-content:space-between;gap:10px}.subject h3{margin:0 0 4px}.tag{font-size:12px;padding:5px 8px;border-radius:99px;background:#efefff;color:#504bd2;font-weight:700;white-space:nowrap}.bar{height:9px;background:#eceef3;border-radius:99px;overflow:hidden;margin:15px 0}.bar i{height:100%;display:block;background:linear-gradient(90deg,var(--p),var(--p2));border-radius:99px}.chapter{display:flex;gap:11px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.chapter:last-child{border-bottom:0}.chapter input{width:18px;height:18px;accent-color:var(--p)}.chapter small{display:block;color:var(--muted);margin-top:3px}.cols{grid-template-columns:1.25fr .75fr}.list{display:grid;gap:9px}.note{padding:13px;border:1px solid var(--line);border-radius:14px;background:#fafbff}.note b{display:block;margin-bottom:3px}.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:var(--card);outline:none}.filterRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.filter{padding:8px 11px;border:1px solid var(--line);background:var(--card);border-radius:99px;color:var(--muted)}.filter.active{background:#efefff;color:#4f49d0}.empty{text-align:center;color:var(--muted);padding:25px}.modal{position:fixed;inset:0;background:#0b102080;display:none;place-items:center;padding:18px;z-index:20}.modal.show{display:grid}.modalBox{background:var(--card);width:min(680px,100%);border-radius:22px;padding:22px}.modalBox h2{margin:0 0 14px}.modalBox input,.modalBox select,.modalBox textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--card);color:var(--text)}textarea{min-height:230px;resize:vertical}.modalFoot{display:flex;justify-content:flex-end;gap:8px}.hidden{display:none!important}
-@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.subjects{grid-template-columns:repeat(2,1fr)}.hero,.cols{grid-template-columns:1fr}}
-@media(max-width:760px){.app{display:block}.side{position:static;width:100%;padding:13px}.logo{padding:6px 10px 12px}.side small{display:none}.nav{display:flex;overflow:auto;gap:4px;margin:0}.nav button{width:auto;white-space:nowrap}.main{margin:0;width:100%;padding:17px}.top h1{font-size:23px}.stats,.subjects{grid-template-columns:1fr}.ring{width:115px;height:115px}}
+:root{
+  --bg:#070a12; --panel:#0e1322; --panel2:#12182a; --line:#20283d;
+  --text:#f4f7ff; --muted:#8e9ab4; --accent:#7c5cff; --accent2:#20d9b2;
+  --warn:#ffbf69; --danger:#ff6b7a; --shadow:0 20px 60px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 80% -10%,rgba(124,92,255,.18),transparent 34%),var(--bg);color:var(--text);font:14px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea{font:inherit} button{cursor:pointer}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:22px 16px;border-right:1px solid var(--line);background:rgba(8,11,20,.86);backdrop-filter:blur(18px);display:flex;flex-direction:column;z-index:10}
+.brand{display:flex;gap:11px;align-items:center;padding:8px 10px 26px}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#b39aff);display:grid;place-items:center;font-weight:900;box-shadow:0 10px 28px rgba(124,92,255,.28)}
+.brand b{font-size:15px}.brand small{display:block;color:var(--muted);margin-top:2px}
+.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#aab4ca;text-align:left;padding:12px 13px;border-radius:12px;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:#151b2d;color:#fff}.nav button.active{box-shadow:inset 3px 0 0 var(--accent)}
+.sidebarBottom{margin-top:auto}.mini{border:1px solid var(--line);background:#0d1322;border-radius:16px;padding:14px}.mini span{color:var(--muted);font-size:12px}.mini strong{display:block;font-size:22px;margin-top:4px}
+.main{min-width:0}.topbar{height:74px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:8;background:rgba(7,10,18,.75);backdrop-filter:blur(16px)}
+.search{display:flex;align-items:center;gap:10px;background:#101629;border:1px solid var(--line);padding:9px 13px;border-radius:12px;width:min(420px,50vw)}.search input{border:0;outline:0;background:transparent;color:#fff;width:100%}
+.actions{display:flex;gap:8px}.iconbtn{border:1px solid var(--line);background:#101629;color:#dce4f7;border-radius:11px;width:38px;height:38px}
+.content{max-width:1440px;margin:auto;padding:32px}
+.page{display:none}.page.active{display:block}
+.eyebrow{color:#8e9ab4;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:800}
+h1{font-size:clamp(28px,4vw,46px);line-height:1.05;margin:8px 0 10px;letter-spacing:-.04em} h2{font-size:20px;margin:0 0 16px} h3{margin:0 0 7px}
+.sub{color:var(--muted);max-width:720px;line-height:1.6}
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin-bottom:22px}
+.heroMain,.heroSide,.card{background:linear-gradient(145deg,rgba(18,24,42,.94),rgba(12,17,30,.94));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.heroMain{padding:30px;position:relative;overflow:hidden}.heroMain:after{content:"";position:absolute;width:250px;height:250px;border-radius:50%;background:rgba(124,92,255,.18);filter:blur(35px);right:-90px;top:-90px}
+.heroMain>*{position:relative;z-index:1}.heroSide{padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+.progressRing{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent) var(--p,0%),#252d43 0);position:relative}
+.progressRing:after{content:"";position:absolute;inset:9px;background:#101629;border-radius:50%}.progressRing span{position:relative;z-index:1;font-size:21px;font-weight:900}
+.primary{border:0;background:linear-gradient(135deg,var(--accent),#9d82ff);color:white;font-weight:800;border-radius:11px;padding:11px 16px;box-shadow:0 12px 30px rgba(124,92,255,.22)}.ghost{border:1px solid var(--line);background:#101629;color:#dfe6f7;border-radius:11px;padding:10px 14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.stat{padding:17px;border:1px solid var(--line);border-radius:17px;background:#0d1322}.stat small{color:var(--muted)}.stat b{display:block;font-size:25px;margin-top:5px}
+.section{margin-top:28px}.sectionHead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.subjectGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.subject{padding:19px}.subjectTop{display:flex;justify-content:space-between;align-items:start}.badge{font-size:11px;padding:5px 8px;border-radius:999px;background:#171e33;color:#aeb9d2}.bar{height:7px;background:#20283b;border-radius:99px;overflow:hidden;margin-top:15px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:inherit}.row{display:flex;gap:9px;align-items:center}.split{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.list{display:grid;gap:8px}.item{padding:14px;border:1px solid var(--line);background:#0d1322;border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}.item .meta{color:var(--muted);font-size:12px;margin-top:3px}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #2a334b;border-radius:16px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.toolbar input,.toolbar select,.modal input,.modal textarea{background:#0d1322;border:1px solid var(--line);color:#fff;border-radius:11px;padding:11px 12px;outline:0}.toolbar input{min-width:260px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#0d1322;color:#aeb9d2;border-radius:999px;padding:7px 11px}.chip.active{background:#211c42;color:#fff;border-color:#4b3a9a}
+.chapterGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.chapter{padding:15px;border:1px solid var(--line);border-radius:15px;background:#0d1322;display:flex;gap:12px;align-items:center}.chapter input{width:18px;height:18px;accent-color:var(--accent)}.chapter.done{opacity:.62}.chapter.done .ct{text-decoration:line-through}
+.notesGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.note{padding:17px;min-height:150px}.note p{color:#b7c1d5;line-height:1.55;white-space:pre-wrap}.note footer{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+.resourceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.resource{padding:18px}.resource a{color:#fff;text-decoration:none}.resource a:hover{color:#b7a9ff}.resource p{color:var(--muted);line-height:1.5}
+.revisionGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.revCard{padding:19px}.due{color:var(--warn);font-size:12px;font-weight:700}
+.modalWrap{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}.modalWrap.show{display:flex}.modal{width:min(560px,100%);background:#101629;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.5)}.modal textarea{width:100%;min-height:150px;resize:vertical;margin-top:10px}.modal input{width:100%;margin-top:10px}.modalActions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.toast{position:fixed;right:20px;bottom:20px;background:#151d31;border:1px solid #303a55;color:#fff;padding:12px 15px;border-radius:12px;display:none;z-index:60}.toast.show{display:block}
+.mobileMenu{display:none}
+@media(max-width:1050px){.subjectGrid,.notesGrid,.resourceGrid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+@media(max-width:760px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:-270px;transition:.25s;width:250px}.sidebar.open{left:0}.mobileMenu{display:block}.topbar{padding:0 15px}.content{padding:20px 15px}.search{width:48vw}.grid4{grid-template-columns:repeat(2,1fr)}.subjectGrid,.notesGrid,.resourceGrid,.chapterGrid,.revisionGrid{grid-template-columns:1fr}.heroMain{padding:23px}.topbar .actions .iconbtn:not(.mobileMenu){display:none}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="side">
-<div class="logo">CBSE<span>Study</span> <small style="font-size:10px">V2</small></div>
-<small>MY STUDY SPACE</small>
-<nav class="nav">
-<button class="active" onclick="page('home',this)">⌂ &nbsp;Dashboard</button>
-<button onclick="page('syllabus',this)">▦ &nbsp;Syllabus</button>
-<button onclick="page('notes',this)">✎ &nbsp;Short Notes</button>
-<button onclick="page('revision',this)">↻ &nbsp;Revision</button>
-</nav>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo">C</div><div><b>CBSE Study Hub</b><small>Class 10 · 2026–27</small></div></div>
+  <nav class="nav">
+    <button class="active" data-page="home">⌂ <span>Dashboard</span></button>
+    <button data-page="syllabus">▦ <span>Syllabus</span></button>
+    <button data-page="notes">✎ <span>My Notes</span></button>
+    <button data-page="revision">↻ <span>Revision</span></button>
+    <button data-page="resources">◈ <span>CBSE Resources</span></button>
+    <button data-page="analytics">◒ <span>Analytics</span></button>
+  </nav>
+  <div class="sidebarBottom"><div class="mini"><span>YOUR PROGRESS</span><strong id="sideProgress">0%</strong><div class="bar"><i id="sideBar"></i></div></div></div>
 </aside>
-<main class="main">
-<header class="top"><div><div class="eyebrow">CLASS 10 · CBSE</div><h1 id="title">Your study dashboard</h1><div class="muted">Plan smart. Revise fast. Stay consistent.</div></div>
-<div class="actions"><button class="btn" onclick="resetAll()">Reset</button><button class="btn primary" onclick="openNote()">＋ Note</button></div></header>
 
-<section id="home" class="page">
-<div class="grid stats">
-<div class="card stat"><div><div class="tiny">Overall progress</div><strong id="overall">0%</strong></div><div class="ico">📈</div></div>
-<div class="card stat"><div><div class="tiny">Completed</div><strong id="done">0</strong></div><div class="ico">✓</div></div>
-<div class="card stat"><div><div class="tiny">To go</div><strong id="left">0</strong></div><div class="ico">📚</div></div>
-<div class="card stat"><div><div class="tiny">My notes</div><strong id="notesCount">0</strong></div><div class="ico">📝</div></div>
-</div>
-<div class="hero">
-<div class="card heroCard"><div class="eyebrow" style="color:#c9c5ff">NEXT UP</div><h2 id="nextTitle">You're ready to start.</h2><p id="nextText">Pick a chapter and make your first bit of progress.</p><div class="heroRow"><button class="btn" id="nextBtn">Start chapter →</button><span style="color:#dfe0ff;font-size:13px" id="nextSubject"></span></div></div>
-<div class="card" style="display:grid;place-items:center"><div class="ring" id="ring"><b id="ringText">0%</b></div></div>
-</div>
-<div class="section"><div class="sectionHead"><h2>Subjects</h2><span class="tiny">Your progress at a glance</span></div><div id="subjects" class="grid subjects"></div></div>
-<div class="section grid cols"><div class="card"><div class="sectionHead"><h2>Continue studying</h2><span class="tag">Quick action</span></div><div id="continue"></div></div>
-<div class="card"><div class="sectionHead"><h2>Recent notes</h2></div><div id="recent" class="list"></div></div></div>
+<main class="main">
+<header class="topbar">
+  <button class="iconbtn mobileMenu" onclick="toggleMenu()">☰</button>
+  <div class="search">⌕ <input id="globalSearch" placeholder="Search chapters, notes, resources…" oninput="globalSearch(this.value)"></div>
+  <div class="actions"><button class="iconbtn" onclick="toggleTheme()" title="Toggle theme">◐</button><button class="iconbtn" onclick="openModal()" title="Quick note">＋</button></div>
+</header>
+
+<div class="content">
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="heroMain"><div class="eyebrow">Your study command centre</div><h1>Study smarter.<br>Track everything.</h1><p class="sub">A premium Class 10 CBSE workspace for syllabus tracking, notes, revision and official CBSE resources — with your data saved on this device.</p><div class="row" style="margin-top:22px"><button class="primary" onclick="go('syllabus')">Continue studying →</button><button class="ghost" onclick="go('resources')">Official CBSE</button></div></div>
+    <div class="heroSide"><div><div class="eyebrow">Overall completion</div><div class="progressRing" id="ring" style="--p:0%;margin-top:18px"><span id="ringText">0%</span></div></div><div><b id="nextTitle">Pick your first chapter</b><p class="sub" id="nextMeta">Your next step will appear here.</p></div></div>
+  </div>
+  <div class="grid4">
+    <div class="stat"><small>Completed</small><b id="doneStat">0</b></div><div class="stat"><small>Remaining</small><b id="todoStat">0</b></div><div class="stat"><small>Notes</small><b id="notesStat">0</b></div><div class="stat"><small>Revision due</small><b id="revStat">0</b></div>
+  </div>
+  <div class="section"><div class="sectionHead"><h2>Subjects</h2><button class="ghost" onclick="go('syllabus')">View syllabus</button></div><div class="subjectGrid" id="subjectGrid"></div></div>
+  <div class="section split"><div class="card" style="padding:19px"><div class="sectionHead"><h2>Continue studying</h2><span class="badge">NEXT</span></div><div class="list" id="continueList"></div></div><div class="card" style="padding:19px"><div class="sectionHead"><h2>Recent notes</h2><button class="ghost" onclick="go('notes')">All notes</button></div><div class="list" id="recentNotes"></div></div></div>
 </section>
 
-<section id="syllabus" class="page hidden"><div class="card"><input id="search" class="search" placeholder="Search a subject or chapter…" oninput="renderSyllabus"><div class="filterRow" id="filters"></div></div><div class="section"><div id="syllabusGrid" class="grid subjects"></div></div></section>
-<section id="notes" class="page hidden"><div class="card"><input id="noteSearch" class="search" placeholder="Search your notes…" oninput="renderNotes()"></div><div class="section"><div id="notesGrid" class="list"></div></div></section>
-<section id="revision" class="page hidden"><div class="card"><div class="sectionHead"><h2>Revision queue</h2><span class="tag" id="revTag">0 chapters</span></div><p class="muted">Completed chapters stay here for quick revision.</p><div id="revisionGrid"></div></div></section>
-</main></div>
+<section id="syllabus" class="page">
+  <div class="eyebrow">2026–27</div><h1>Syllabus</h1><p class="sub">Track every chapter across your Class 10 subjects.</p>
+  <div class="toolbar"><input id="syllSearch" placeholder="Search a chapter…" oninput="renderSyllabus()"><div class="chips" id="subjectChips"></div></div>
+  <div id="syllabusArea"></div>
+</section>
 
-<div id="modal" class="modal"><div class="modalBox"><h2>📝 Add a short note</h2><input id="nTitle" placeholder="e.g. Quadratic Equations — key formulas"><select id="nSubject"></select><textarea id="nBody" placeholder="Write formulas, definitions, shortcuts, important points…"></textarea><div class="modalFoot"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="saveNote()">Save note</button></div></div></div>
+<section id="notes" class="page">
+  <div class="eyebrow">Personal workspace</div><h1>My Notes</h1><p class="sub">Your quick notes, formulas, reminders and exam tips live here.</p>
+  <div class="toolbar"><input id="noteSearch" placeholder="Search notes…" oninput="renderNotes()"><button class="primary" onclick="openModal()">＋ New note</button></div>
+  <div class="notesGrid" id="notesGrid"></div>
+</section>
+
+<section id="revision" class="page">
+  <div class="eyebrow">Spaced repetition</div><h1>Revision Queue</h1><p class="sub">Completed chapters automatically enter your revision workspace. Mark a revision complete to schedule the next one.</p>
+  <div class="revisionGrid"><div class="card revCard"><h2>Due now</h2><div class="list" id="dueList"></div></div><div class="card revCard"><h2>Recently revised</h2><div class="list" id="revisedList"></div></div></div>
+</section>
+
+<section id="resources" class="page">
+  <div class="eyebrow">Official sources</div><h1>CBSE Resources</h1><p class="sub">Quick links to official CBSE Academic material. The hub links out to CBSE rather than copying their documents.</p>
+  <div class="resourceGrid" id="resourceGrid"></div>
+</section>
+
+<section id="analytics" class="page">
+  <div class="eyebrow">Your data</div><h1>Analytics</h1><p class="sub">A simple view of how much of your tracked syllabus is complete.</p>
+  <div class="grid4"><div class="stat"><small>Overall</small><b id="aOverall">0%</b></div><div class="stat"><small>Strongest</small><b id="aStrong">—</b></div><div class="stat"><small>Needs work</small><b id="aWeak">—</b></div><div class="stat"><small>Study streak</small><b id="aStreak">0 days</b></div></div>
+  <div class="card" style="padding:20px"><h2>Subject breakdown</h2><div class="list" id="analyticsList"></div></div>
+</section>
+</div></main></div>
+
+<div class="modalWrap" id="modal"><div class="modal"><div class="sectionHead"><h2>New note</h2><button class="iconbtn" onclick="closeModal()">×</button></div><input id="noteTitle" placeholder="Title"><textarea id="noteBody" placeholder="Write your note…"></textarea><div class="modalActions"><button class="ghost" onclick="closeModal()">Cancel</button><button class="primary" onclick="saveNote()">Save note</button></div></div></div>
+<div class="toast" id="toast"></div>
 
 <script>
-const DATA={"Mathematics":["Real Numbers","Polynomials","Pair of Linear Equations in Two Variables","Quadratic Equations","Arithmetic Progressions","Triangles","Coordinate Geometry","Introduction to Trigonometry","Some Applications of Trigonometry","Circles","Areas Related to Circles","Surface Areas and Volumes","Statistics","Probability"],"Science":["Chemical Reactions and Equations","Acids, Bases and Salts","Metals and Non-metals","Carbon and its Compounds","Life Processes","Control and Coordination","How do Organisms Reproduce?","Heredity","Light – Reflection and Refraction","The Human Eye and the Colourful World","Electricity","Magnetic Effects of Electric Current","Our Environment"],"Social Science":["The Rise of Nationalism in Europe","Nationalism in India","The Making of a Global World","Print Culture and the Modern World","Resources and Development","Forest and Wildlife Resources","Water Resources","Agriculture","Manufacturing Industries","Lifelines of National Economy","Power Sharing","Federalism","Gender, Religion and Caste","Political Parties","Outcomes of Democracy","Development","Sectors of the Indian Economy","Money and Credit","Globalisation and the Indian Economy","Consumer Rights"],"English":["A Letter to God","Nelson Mandela: Long Walk to Freedom","Two Stories about Flying","From the Diary of Anne Frank","Glimpses of India","Mijbil the Otter","Madam Rides the Bus","The Sermon at Benares","The Proposal"],"Hindi":["क्षितिज","कृतिका","व्याकरण","लेखन"],"Information Technology":["Digital Documentation","Electronic Spreadsheet","Database Management System","Web Applications and Security"]};
-let S=JSON.parse(localStorage.getItem("cbseStudyV2")||'{"done":[],"notes":[]}'),filter="All";
-const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])),key=(s,c)=>s+"::"+c,all=()=>Object.entries(DATA).flatMap(([s,cs])=>cs.map(c=>({s,c}))),isDone=(s,c)=>S.done.includes(key(s,c));
-function save(){localStorage.setItem("cbseStudyV2",JSON.stringify(S));renderAll()}
-function toggle(s,c){let k=key(s,c);S.done=S.done.includes(k)?S.done.filter(x=>x!==k):[...S.done,k];save()}
-function metrics(){let a=all(),d=S.done.length;return[a,d,a.length-d,a.length?Math.round(d/a.length*100):0]}
-function renderHome(){let [a,d,l,p]=metrics();overall.textContent=p+"%";done.textContent=d;left.textContent=l;notesCount.textContent=S.notes.length;ringText.textContent=p+"%";ring.style.setProperty("--pct",p+"%");
-subjects.innerHTML=Object.entries(DATA).map(([s,cs])=>{let x=cs.filter(c=>isDone(s,c)).length,q=Math.round(x/cs.length*100);return `<div class="card subject"><div class="subjectTop"><div><h3>${s}</h3><div class="tiny">${x} of ${cs.length} completed</div></div><span class="tag">${q}%</span></div><div class="bar"><i style="width:${q}%"></i></div><button class="btn" onclick="openSubject('${esc(s)}')">Open subject →</button></div>`}).join("");
-let n=all().find(x=>!isDone(x.s,x.c));if(n){nextTitle.textContent=n.c;nextText.textContent="Your next chapter is waiting. Mark it complete when you're done.";nextSubject.textContent=n.s;nextBtn.onclick=()=>openSubject(n.s)}else{nextTitle.textContent="Syllabus complete! 🎉";nextText.textContent="Amazing work. Use revision to keep everything fresh.";nextSubject.textContent="";nextBtn.onclick=()=>page("revision",document.querySelectorAll(".nav button")[3])}
-continue.innerHTML=n?`<div class="chapter" style="border:0"><div class="ico">🎯</div><div><b>${esc(n.c)}</b><small>${esc(n.s)} · next recommended chapter</small></div><button class="btn primary" style="margin-left:auto" onclick="openSubject('${esc(n.s)}')">Open</button></div>`:'<div class="empty">Everything is completed. Time to revise! 🎉</div>';
-recent.innerHTML=S.notes.slice(-3).reverse().map(n=>`<div class="note"><b>${esc(n.title)}</b><div class="tiny">${esc(n.subject)}</div></div>`).join("")||'<div class="empty">No notes yet. Add your first one.</div>'}
-function renderFilters(){filters.innerHTML=["All",...Object.keys(DATA)].map(x=>`<button class="filter ${filter===x?"active":""}" onclick="filter='${esc(x)}';renderFilters();renderSyllabus()">${x}</button>`).join("")}
-function renderSyllabus(){let q=(search.value||"").toLowerCase(),ents=Object.entries(DATA).filter(([s])=>filter==="All"||s===filter);syllabusGrid.innerHTML=ents.map(([s,cs])=>{let arr=cs.filter(c=>(s+" "+c).toLowerCase().includes(q));if(!arr.length)return "";return `<div class="card"><div class="subjectTop"><h3>${s}</h3><span class="tag">${cs.filter(c=>isDone(s,c)).length}/${cs.length}</span></div>${arr.map(c=>`<label class="chapter"><input type="checkbox" ${isDone(s,c)?"checked":""} onchange="toggle('${esc(s)}','${esc(c)}')"><div><b>${esc(c)}</b><small>${isDone(s,c)?"Completed":"Not completed yet"}</small></div></label>`).join("")}</div>`}).join("")||'<div class="card empty">No chapters match your search.</div>'}
-function renderNotes(){let q=(noteSearch.value||"").toLowerCase(),a=S.notes.filter(n=>(n.title+" "+n.subject+" "+n.body).toLowerCase().includes(q));notesGrid.innerHTML=a.length?a.slice().reverse().map(n=>`<div class="card"><div class="sectionHead"><div><b>${esc(n.title)}</b><div class="tiny">${esc(n.subject)}</div></div><button class="btn" onclick="delNote('${n.id}')">Delete</button></div><div style="white-space:pre-wrap;line-height:1.65">${esc(n.body)}</div></div>`).join(""):'<div class="card empty">No notes found.</div>'}
-function renderRevision(){let a=all().filter(x=>isDone(x.s,x.c));revTag.textContent=a.length+" chapter"+(a.length===1?"":"s");revisionGrid.innerHTML=a.length?a.map(x=>`<label class="chapter"><input type="checkbox" checked onchange="toggle('${esc(x.s)}','${esc(x.c)}')"><div><b>${esc(x.c)}</b><small>${esc(x.s)} · click to mark incomplete</small></div></label>`).join(""):'<div class="empty">Complete chapters in Syllabus and they will appear here.</div>'}
-function renderAll(){renderHome();renderFilters();renderSyllabus();renderNotes();renderRevision()}
-function page(p,b){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(p).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");title.textContent={home:"Your study dashboard",syllabus:"Your syllabus",notes:"Your short notes",revision:"Revision queue"}[p];scrollTo(0,0)}
-function openSubject(s){page("syllabus",document.querySelectorAll(".nav button")[1]);filter=s;renderFilters();search.value="";renderSyllabus()}
-function openNote(){nTitle.value="";nBody.value="";nSubject.innerHTML=Object.keys(DATA).map(s=>`<option>${s}</option>`).join("");modal.classList.add("show")}
-function closeModal(){modal.classList.remove("show")}
-function saveNote(){if(!nTitle.value.trim()||!nBody.value.trim()){alert("Add a title and some note text.");return}S.notes.push({id:Date.now(),title:nTitle.value.trim(),subject:nSubject.value,body:nBody.value.trim()});closeModal();save()}
-function delNote(id){S.notes=S.notes.filter(n=>n.id!=id);save()}
-function resetAll(){if(confirm("Reset all progress and notes?")){S={done:[],notes:[]};filter="All";save()}}
+const DATA={
+"Mathematics":["Real Numbers","Polynomials","Pair of Linear Equations in Two Variables","Quadratic Equations","Arithmetic Progressions","Triangles","Coordinate Geometry","Introduction to Trigonometry","Some Applications of Trigonometry","Circles","Areas Related to Circles","Surface Areas and Volumes","Statistics","Probability"],
+"Science":["Chemical Reactions and Equations","Acids, Bases and Salts","Metals and Non-metals","Carbon and its Compounds","Life Processes","Control and Coordination","How do Organisms Reproduce?","Heredity","Light – Reflection and Refraction","The Human Eye and the Colourful World","Electricity","Magnetic Effects of Electric Current","Our Environment"],
+"Social Science":["The Rise of Nationalism in Europe","Nationalism in India","The Making of a Global World","Print Culture and the Modern World","Resources and Development","Forest and Wildlife Resources","Water Resources","Agriculture","Manufacturing Industries","Lifelines of National Economy","Power Sharing","Federalism","Gender, Religion and Caste","Political Parties","Outcomes of Democracy","Development","Sectors of the Indian Economy","Money and Credit","Globalisation and the Indian Economy","Consumer Rights"],
+"English":["A Letter to God","Nelson Mandela: Long to Freedom","Two Stories about Flying","From the Diary of Anne Frank","Glimpses of India","Mijbil the Otter","Madam Rides the Bus","The Sermon at Benares","The Proposal"],
+"Hindi":["क्षितिज","कृतिका","व्याकरण","लेखन"],
+"Information Technology":["Digital Documentation","Electronic Spreadsheet","Database Management System","Web Applications and Security"]
+};
+const COLORS={"Mathematics":"#7c5cff","Science":"#20d9b2","Social Science":"#ffbf69","English":"#6ea8ff","Hindi":"#ff7eb6","Information Technology":"#9aa7ff"};
+const RES=[
+["2026–27 Curriculum","Official CBSE curriculum portal","https://cbseacademic.nic.in/curriculum_2027.html"],
+["CBSE Academic Home","Official academic announcements and portals","https://cbseacademic.nic.in/index.html"],
+["Class X Question Bank","CBSE competency-oriented question bank","https://cbseacademic.nic.in/qbclass10.html"],
+["CBSE CBE Assessment","Competency-based assessment resources","https://cbseacademic.nic.in/cbe/assessment.html"],
+["Skill Education Curriculum","Class X skill-subject curriculum","https://cbseacademic.nic.in/skill-education-curriculum.html"],
+["Skill Education SQPs","Official skill-subject sample papers","https://cbseacademic.nic.in/skill-education-sqp.html"],
+["CBSE Skill SQP Archive","Older official skill sample papers","https://cbseacademic.nic.in/skill-education-sqp_archive.html"]
+];
+const KEY="cbseHubV3";
+let state=JSON.parse(localStorage.getItem(KEY)||'{"done":[],"notes":[],"revisions":{},"lastStudy":null,"streak":0,"theme":"dark"}');
+let filterSubject="All";
+const allChapters=()=>Object.entries(DATA).flatMap(([s,chs])=>chs.map(c=>({s,c,id:s+"::"+c})));
+function save(){localStorage.setItem(KEY,JSON.stringify(state));renderAll()}
+function pct(){let a=allChapters();return a.length?Math.round(state.done.length/a.length*100):0}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function go(page){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(page).classList.add("active");document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));if(page==="syllabus")renderSyllabus();if(page==="notes")renderNotes();if(page==="revision")renderRevision();if(page==="analytics")renderAnalytics();if(page==="resources")renderResources();window.scrollTo({top:0,behavior:"smooth"});document.getElementById("sidebar").classList.remove("open")}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.page));
+function renderHome(){
+ let p=pct(), total=allChapters().length;
+ document.getElementById("ring").style.setProperty("--p",p+"%");document.getElementById("ringText").textContent=p+"%";
+ document.getElementById("sideProgress").textContent=p+"%";document.getElementById("sideBar").style.width=p+"%";
+ document.getElementById("doneStat").textContent=state.done.length;document.getElementById("todoStat").textContent=total-state.done.length;document.getElementById("notesStat").textContent=state.notes.length;
+ let due=allChapters().filter(x=>state.revisions[x.id]?.due!==false && state.done.includes(x.id) && (!state.revisions[x.id]||state.revisions[x.id].due<=Date.now())).length;
+ document.getElementById("revStat").textContent=due;
+ let next=allChapters().find(x=>!state.done.includes(x.id));
+ document.getElementById("nextTitle").textContent=next?next.c:"Everything completed 🎉";document.getElementById("nextMeta").textContent=next?next.s+" · Mark it complete when you finish.":"You've completed every tracked chapter.";
+ let sg=document.getElementById("subjectGrid");sg.innerHTML=Object.entries(DATA).map(([s,chs])=>{let d=chs.filter(c=>state.done.includes(s+"::"+c)).length,p=Math.round(d/chs.length*100);return `<div class="card subject"><div class="subjectTop"><div><h3>${esc(s)}</h3><div class="sub">${d} of ${chs.length} chapters</div></div><span class="badge">${p}%</span></div><div class="bar"><i style="width:${p}%"></i></div><button class="ghost" style="margin-top:14px" onclick="filterAndOpen('${esc(s)}')">Open subject →</button></div>`}).join("");
+ let cont=allChapters().filter(x=>!state.done.includes(x.id)).slice(0,4);document.getElementById("continueList").innerHTML=cont.length?cont.map(x=>`<div class="item"><div><b>${esc(x.c)}</b><div class="meta">${esc(x.s)}</div></div><button class="ghost" onclick="toggleDone('${esc(x.id)}')">Mark done</button></div>`).join(""):`<div class="empty">No chapters left.</div>`;
+ document.getElementById("recentNotes").innerHTML=state.notes.slice(-4).reverse().map(n=>`<div class="item"><div><b>${esc(n.title)}</b><div class="meta">${new Date(n.time).toLocaleDateString()}</div></div><button class="ghost" onclick="go('notes')">Open</button></div>`).join("")||`<div class="empty">No notes yet.</div>`;
+}
+function filterAndOpen(s){filterSubject=s;go("syllabus")}
+function renderSyllabus(){
+ let q=(document.getElementById("syllSearch")?.value||"").toLowerCase();let subjects=filterSubject==="All"?Object.entries(DATA):Object.entries(DATA).filter(([s])=>s===filterSubject);
+ document.getElementById("subjectChips").innerHTML=["All",...Object.keys(DATA)].map(s=>`<button class="chip ${filterSubject===s?"active":""}" onclick="filterSubject='${esc(s)}';renderSyllabus()">${esc(s)}</button>`).join("");
+ document.getElementById("syllabusArea").innerHTML=subjects.map(([s,chs])=>{let shown=chs.map((c,i)=>({c,i})).filter(x=>x.c.toLowerCase().includes(q));if(!shown.length)return "";return `<div class="section"><div class="sectionHead"><h2>${esc(s)}</h2><span class="badge">${shown.length} shown</span></div><div class="chapterGrid">${shown.map(x=>{let id=s+"::"+x.c,done=state.done.includes(id);return `<label class="chapter ${done?"done":""}"><input type="checkbox" ${done?"checked":""} onchange="toggleDone('${esc(id)}')"><div><div class="ct"><b>${esc(x.c)}</b></div><div class="meta" style="color:var(--muted);font-size:12px">Chapter ${x.i+1} · ${done?"Completed":"Not completed"}</div></div></label>`}).join("")}</div></div>`}).join("")||`<div class="empty">No chapters match your search.</div>`;
+}
+function toggleDone(id){let i=state.done.indexOf(id);if(i<0){state.done.push(id);state.lastStudy=Date.now();state.streak=Math.max(1,state.streak||0);state.revisions[id]={due:Date.now()+86400000,count:0}}else{state.done.splice(i,1);delete state.revisions[id]}save();toast(i<0?"Chapter completed ✓":"Chapter reopened")}
+function openModal(){document.getElementById("modal").classList.add("show");setTimeout(()=>document.getElementById("noteTitle").focus(),50)}
+function closeModal(){document.getElementById("modal").classList.remove("show");document.getElementById("noteTitle").value="";document.getElementById("noteBody").value=""}
+function saveNote(){let t=document.getElementById("noteTitle").value.trim(),b=document.getElementById("noteBody").value.trim();if(!t||!b)return toast("Add a title and note first.");state.notes.push({title:t,body:b,time:Date.now()});closeModal();save();toast("Note saved ✓")}
+function renderNotes(){let q=(document.getElementById("noteSearch")?.value||"").toLowerCase();let ns=state.notes.filter(n=>(n.title+" "+n.body).toLowerCase().includes(q)).slice().reverse();document.getElementById("notesGrid").innerHTML=ns.length?ns.map((n,ri)=>{let real=state.notes.indexOf(n);return `<article class="card note"><div class="sectionHead"><h3>${esc(n.title)}</h3><button class="iconbtn" onclick="deleteNote(${real})">×</button></div><p>${esc(n.body)}</p><footer><span>${new Date(n.time).toLocaleDateString()}</span><span>PERSONAL</span></footer></article>`}).join(""):`<div class="empty">No notes found. Create your first one.</div>`}
+function deleteNote(i){if(confirm("Delete this note?")){state.notes.splice(i,1);save();toast("Note deleted")}}
+function renderRevision(){let now=Date.now(),due=[],recent=[];allChapters().filter(x=>state.done.includes(x.id)).forEach(x=>{let r=state.revisions[x.id]||{due:now};(r.due<=now?due:recent).push({...x,r})});document.getElementById("dueList").innerHTML=due.length?due.map(x=>`<div class="item"><div><b>${esc(x.c)}</b><div class="meta">${esc(x.s)} · ${x.r.count||0} revisions</div></div><button class="primary" onclick="revise('${esc(x.id)}')">Revise ✓</button></div>`).join(""):`<div class="empty">Nothing due right now. Nice work.</div>`;document.getElementById("revisedList").innerHTML=recent.length?recent.sort((a,b)=>a.r.due-b.r.due).map(x=>`<div class="item"><div><b>${esc(x.c)}</b><div class="meta">${esc(x.s)}</div></div><span class="due">Due ${new Date(x.r.due).toLocaleDateString()}</span></div>`).join(""):`<div class="empty">Completed chapters will appear here.</div>`}
+function revise(id){let r=state.revisions[id]||{count:0};r.count=(r.count||0)+1;let days=[1,3,7,14,30][Math.min(r.count,4)];r.due=Date.now()+days*86400000;state.revisions[id]=r;save();toast("Revision logged · next review in "+days+" day"+(days>1?"s":""))}
+function renderResources(){document.getElementById("resourceGrid").innerHTML=RES.map(r=>`<article class="card resource"><span class="badge">OFFICIAL CBSE</span><h3 style="margin-top:13px"><a href="${r[2]}" target="_blank" rel="noopener">${esc(r[0])} ↗</a></h3><p>${esc(r[1])}</p></article>`).join("")}
+function renderAnalytics(){let entries=Object.entries(DATA).map(([s,chs])=>{let d=chs.filter(c=>state.done.includes(s+"::"+c)).length;return [s,d,Math.round(d/chs.length*100)]});let sorted=entries.slice().sort((a,b)=>b[2]-a[2]);document.getElementById("aOverall").textContent=pct()+"%";document.getElementById("aStrong").textContent=sorted[0]?.[0]||"—";document.getElementById("aWeak").textContent=sorted[sorted.length-1]?.[0]||"—";document.getElementById("aStreak").textContent=(state.streak||0)+" days";document.getElementById("analyticsList").innerHTML=entries.map(x=>`<div class="item"><div style="width:100%"><div class="sectionHead"><b>${esc(x[0])}</b><span>${x[2]}%</span></div><div class="bar"><i style="width:${x[2]}%"></i></div></div></div>`).join("")}
+function globalSearch(q){if(q.trim()){go("syllabus");document.getElementById("syllSearch").value=q;renderSyllabus()}}
+function toggleTheme(){state.theme=state.theme==="light"?"dark":"light";if(state.theme==="light"){document.documentElement.style.setProperty("--bg","#f5f7fb");document.documentElement.style.setProperty("--panel","#fff");document.documentElement.style.setProperty("--text","#111827");document.documentElement.style.setProperty("--muted","#68738a")}else location.reload();localStorage.setItem(KEY,JSON.stringify(state));toast("Theme changed")}
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
+function renderAll(){renderHome();renderSyllabus();renderNotes();renderRevision();renderAnalytics();renderResources()}
 renderAll();
 </script>
 </body></html>
