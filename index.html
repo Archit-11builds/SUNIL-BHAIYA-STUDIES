@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBSE Study Dashboard</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e7eaf0;--primary:#635bff;--primary2:#8178ff;--green:#16a34a;--orange:#f59e0b;--red:#ef4444;--shadow:0 10px 30px rgba(31,41,55,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.app{display:flex;min-height:100vh}.sidebar{width:250px;background:#111827;color:white;padding:24px 16px;position:fixed;inset:0 auto 0 0}.brand{font-size:21px;font-weight:800;padding:10px 12px 28px}.brand span{color:#9b93ff}
+.nav button{width:100%;background:transparent;color:#cbd5e1;text-align:left;padding:12px 14px;border-radius:12px;margin:3px 0}.nav button.active,.nav button:hover{background:#252b3d;color:#fff}.main{margin-left:250px;width:calc(100% - 250px);padding:28px;max-width:1500px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:28px}.sub{color:var(--muted);margin-top:5px}.actions{display:flex;gap:10px}.btn{padding:10px 15px;border-radius:11px;background:var(--card);border:1px solid var(--line);color:var(--text)}.btn.primary{background:var(--primary);color:white;border-color:var(--primary)}
+.grid{display:grid;gap:18px}.stats{grid-template-columns:repeat(4,1fr)}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}.stat{display:flex;justify-content:space-between;align-items:center}.stat h2{margin:5px 0 0;font-size:28px}.label{font-size:13px;color:var(--muted)}.icon{width:42px;height:42px;border-radius:13px;background:#efefff;display:grid;place-items:center;font-size:20px}.progress{height:9px;background:#eceef3;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}.section{margin-top:20px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-title h2{font-size:19px;margin:0}.subjects{grid-template-columns:repeat(3,1fr)}.subject{transition:.18s}.subject:hover{transform:translateY(-2px)}.subject-head{display:flex;justify-content:space-between;gap:12px}.subject h3{margin:0 0 5px}.pill{font-size:12px;padding:5px 8px;border-radius:999px;background:#f0efff;color:#5149d8;white-space:nowrap}.chapter{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}.chapter:last-child{border-bottom:0}.chapter input{width:18px;height:18px;accent-color:var(--primary)}.chapter small{display:block;color:var(--muted);margin-top:2px}.two{grid-template-columns:1.2fr .8fr}.note-list{display:grid;gap:10px}.note{padding:14px;border:1px solid var(--line);border-radius:13px;background:#fafbff}.note b{display:block;margin-bottom:4px}.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;outline:none;background:var(--card)}.search:focus{border-color:var(--primary)}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.show{display:flex}.modalbox{background:white;width:min(650px,100%);max-height:90vh;overflow:auto;border-radius:20px;padding:22px}.modalbox h2{margin-top:0}.modalbox textarea{width:100%;min-height:220px;padding:12px;border:1px solid var(--line);border-radius:12px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}.empty{color:var(--muted);padding:20px;text-align:center}
+@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.subjects{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:750px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin:0;width:100%;padding:18px}.nav{display:flex;overflow:auto;gap:5px}.nav button{white-space:nowrap;width:auto}.brand{padding-bottom:15px}.top{align-items:flex-start;gap:10px}.top h1{font-size:23px}.actions .btn{padding:9px}.subjects,.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">CBSE<span>Study</span></div>
+  <div class="nav">
+    <button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
+    <button onclick="showPage('syllabus',this)">📚 Syllabus</button>
+    <button onclick="showPage('notes',this)">📝 Short Notes</button>
+    <button onclick="showPage('revision',this)">🔁 Revision</button>
+  </div>
+</aside>
+<main class="main">
+  <div class="top">
+    <div><h1 id="pageTitle">Good luck with your boards! 👋</h1><div class="sub">Track chapters, save notes and stay on top of revision.</div></div>
+    <div class="actions"><button class="btn" onclick="resetAll()">Reset</button><button class="btn primary" onclick="openNote()">＋ Add Note</button></div>
+  </div>
+
+  <section id="dashboard" class="page">
+    <div class="grid stats">
+      <div class="card stat"><div><div class="label">Overall progress</div><h2 id="overall">0%</h2></div><div class="icon">📈</div></div>
+      <div class="card stat"><div><div class="label">Completed</div><h2 id="done">0</h2></div><div class="icon">✅</div></div>
+      <div class="card stat"><div><div class="label">Remaining</div><h2 id="remaining">0</h2></div><div class="icon">📖</div></div>
+      <div class="card stat"><div><div class="label">My notes</div><h2 id="noteCount">0</h2></div><div class="icon">📝</div></div>
+    </div>
+    <div class="section"><div class="section-title"><h2>Subject progress</h2></div><div id="subjectCards" class="grid subjects"></div></div>
+    <div class="section grid two">
+      <div class="card"><div class="section-title"><h2>Today's focus</h2><span class="pill">Quick view</span></div><div id="focus"></div></div>
+      <div class="card"><div class="section-title"><h2>Recent notes</h2></div><div id="recentNotes" class="note-list"></div></div>
+    </div>
+  </section>
+
+  <section id="syllabus" class="page hidden">
+    <div class="card"><input id="search" class="search" placeholder="Search subjects or chapters..." oninput="renderSyllabus()"></div>
+    <div class="section"><div id="syllabusList" class="grid subjects"></div></div>
+  </section>
+
+  <section id="notes" class="page hidden">
+    <div class="card"><input id="noteSearch" class="search" placeholder="Search your notes..." oninput="renderNotes()"></div>
+    <div class="section"><div id="notesList" class="note-list"></div></div>
+  </section>
+
+  <section id="revision" class="page hidden">
+    <div class="card">
+      <div class="section-title"><h2>Chapters to revise</h2><span class="pill" id="revCount">0</span></div>
+      <div id="revisionList"></div>
+    </div>
+  </section>
+</main>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modalbox">
+    <h2 id="modalTitle">Add short note</h2>
+    <input id="noteTitle" class="search" placeholder="Note title" style="margin-bottom:10px">
+    <select id="noteSubject" class="search" style="margin-bottom:10px"></select>
+    <textarea id="noteBody" placeholder="Write formulas, definitions, key points, shortcuts..."></textarea>
+    <div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="saveNote()">Save note</button></div>
+  </div>
+</div>
+
+<script>
+const data={
+"Mathematics":["Real Numbers","Polynomials","Pair of Linear Equations in Two Variables","Quadratic Equations","Arithmetic Progressions","Triangles","Coordinate Geometry","Introduction to Trigonometry","Some Applications of Trigonometry","Circles","Areas Related to Circles","Surface Areas and Volumes","Statistics","Probability"],
+"Science":["Chemical Reactions and Equations","Acids, Bases and Salts","Metals and Non-metals","Carbon and its Compounds","Life Processes","Control and Coordination","How do Organisms Reproduce?","Heredity","Light – Reflection and Refraction","The Human Eye and the Colourful World","Electricity","Magnetic Effects of Electric Current","Our Environment"],
+"Social Science":["The Rise of Nationalism in Europe","Nationalism in India","The Making of a Global World","Print Culture and the Modern World","Resources and Development","Forest and Wildlife Resources","Water Resources","Agriculture","Manufacturing Industries","Lifelines of National Economy","Power Sharing","Federalism","Gender, Religion and Caste","Political Parties","Outcomes of Democracy","Development","Sectors of the Indian Economy","Money and Credit","Globalisation and the Indian Economy","Consumer Rights"],
+"English":["A Letter to God","Nelson Mandela: Long Walk to Freedom","Two Stories about Flying","From the Diary of Anne Frank","Glimpses of India","Mijbil the Otter","Madam Rides the Bus","The Sermon at Benares","The Proposal","Dust of Snow","Fire and Ice","A Tiger in the Zoo"],
+"Hindi":["क्षितिज – गद्य एवं काव्य","कृतिका","व्याकरण","लेखन"],
+"Information Technology":["Digital Documentation","Electronic Spreadsheet","Database Management System","Web Applications and Security"]
+};
+let state=JSON.parse(localStorage.getItem("cbseStudy")||'{"done":[],"notes":[]}');
+const key=(s,c)=>s+"::"+c;
+function save(){localStorage.setItem("cbseStudy",JSON.stringify(state));renderAll()}
+function allChapters(){return Object.entries(data).flatMap(([s,cs])=>cs.map(c=>({s,c})))}
+function isDone(s,c){return state.done.includes(key(s,c))}
+function toggle(s,c){let k=key(s,c);state.done=state.done.includes(k)?state.done.filter(x=>x!==k):[...state.done,k];save()}
+function stats(){let all=allChapters(), d=state.done.length;return {all,d,rem:all.length-d,pct:all.length?Math.round(d/all.length*100):0}}
+function renderDashboard(){
+let st=stats();overall.textContent=st.pct+"%";done.textContent=st.d;remaining.textContent=st.rem;noteCount.textContent=state.notes.length;
+subjectCards.innerHTML=Object.entries(data).map(([s,cs])=>{let d=cs.filter(c=>isDone(s,c)).length,p=Math.round(d/cs.length*100);return `<div class="card subject"><div class="subject-head"><div><h3>${s}</h3><div class="label">${d}/${cs.length} chapters completed</div></div><span class="pill">${p}%</span></div><div style="margin:14px 0" class="progress"><i style="width:${p}%"></i></div><button class="btn" onclick="openSubject('${s.replaceAll("'","\\'")}')">View chapters →</button></div>`}).join("");
+let next=allChapters().find(x=>!isDone(x.s,x.c));focus.innerHTML=next?`<b>${next.s}</b><div style="margin:6px 0 14px">${next.c}</div><button class="btn primary" onclick="toggle('${next.s.replaceAll("'","\\'")}','${next.c.replaceAll("'","\\'")}')">Mark complete</button>`:`<div class="empty">Everything is completed. 🎉</div>`;
+recentNotes.innerHTML=state.notes.slice(-3).reverse().map(n=>`<div class="note"><b>${esc(n.title)}</b><span class="label">${esc(n.subject)}</span></div>`).join("")||'<div class="empty">No notes yet.</div>';
+}
+function renderSyllabus(){
+let q=(document.getElementById("search")?.value||"").toLowerCase();
+syllabusList.innerHTML=Object.entries(data).map(([s,cs])=>{let arr=cs.filter(c=>(s+" "+c).toLowerCase().includes(q));if(!arr.length)return "";return `<div class="card"><div class="subject-head"><div><h3>${s}</h3></div><span class="pill">${cs.filter(c=>isDone(s,c)).length}/${cs.length}</span></div>${arr.map(c=>`<label class="chapter"><input type="checkbox" ${isDone(s,c)?"checked":""} onchange="toggle('${s.replaceAll("'","\\'")}','${c.replaceAll("'","\\'")}')"><div><b>${esc(c)}</b><small>${isDone(s,c)?"Completed":"Tap to mark complete"}</small></div></label>`).join("")}</div>`}).join("")||'<div class="card empty">No matching chapters.</div>';
+}
+function renderNotes(){
+let q=(document.getElementById("noteSearch")?.value||"").toLowerCase();
+let arr=state.notes.filter(n=>(n.title+" "+n.subject+" "+n.body).toLowerCase().includes(q));
+notesList.innerHTML=arr.length?arr.slice().reverse().map(n=>`<div class="card note"><div style="display:flex;justify-content:space-between;gap:10px"><div><b>${esc(n.title)}</b><div class="label">${esc(n.subject)}</div></div><button class="btn" onclick="deleteNote('${n.id}')">Delete</button></div><p style="white-space:pre-wrap;line-height:1.6">${esc(n.body)}</p></div>`).join(""):'<div class="card empty">No notes found.</div>';
+}
+function renderRevision(){let arr=allChapters().filter(x=>isDone(x.s,x.c));revCount.textContent=arr.length;revisionList.innerHTML=arr.length?arr.map(x=>`<label class="chapter"><input type="checkbox" onchange="toggle('${x.s.replaceAll("'","\\'")}','${x.c.replaceAll("'","\\'")}')" checked><div><b>${esc(x.c)}</b><small>${esc(x.s)} · marked complete</small></div></label>`).join(""):'<div class="empty">Complete chapters will appear here for revision.</div>'}
+function renderAll(){renderDashboard();renderSyllabus();renderNotes();renderRevision()}
+function showPage(id,btn){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById("pageTitle").textContent={dashboard:"Good luck with your boards! 👋",syllabus:"Your Syllabus",notes:"Short Notes",revision:"Revision"}[id]}
+function openSubject(s){showPage("syllabus",document.querySelectorAll(".nav button")[1]);search.value=s}
+function openNote(){modal.classList.add("show");noteTitle.value="";noteBody.value="";noteSubject.innerHTML=Object.keys(data).map(s=>`<option>${s}</option>`).join("")}
+function closeModal(){modal.classList.remove("show")}
+function saveNote(){if(!noteTitle.value.trim()||!noteBody.value.trim())return alert("Please add a title and some note text.");state.notes.push({id:Date.now().toString(),title:noteTitle.value.trim(),subject:noteSubject.value,body:noteBody.value});closeModal();save()}
+function deleteNote(id){state.notes=state.notes.filter(n=>n.id!==id);save()}
+function resetAll(){if(confirm("Reset all chapter progress and notes?")){state={done:[],notes:[]};save()}}
+function esc(x){return String(x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+renderAll();
+</script>
+</body>
+</html>
